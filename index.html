@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultoría de producto y go-to-market | Next Rocket Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Mulish:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --midnight-blue: #0c294f;
+      --blue-card: #0f3463;
+      --white: white;
+      --white-smoke: #f0f0f0;
+      --gradient-primary: linear-gradient(84.86deg, #5861ed, #ec46d1);
+      --gradient-primary-soft: linear-gradient(86.5deg, rgba(88, 97, 237, 0.3), rgba(236, 70, 209, 0.3));
+      --gradient-hero: linear-gradient(229.38deg, #217bee, #0c294f 41.27%);
+      --gradient-text: linear-gradient(to right, #3888f0, #8beb7b 50%, #cd4cd8 101%);
+      --gradient-promise: linear-gradient(273.29deg, rgba(22, 59, 106, 0.9) 17.49%, rgba(45, 30, 113, 0.9) 91.59%);
+      --border-secondary: #e75a52;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--white);
+      background-color: var(--midnight-blue);
+      letter-spacing: 0.02em;
+    }
+
+    .container { width: 100%; max-width: 68rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .section { padding-top: 4rem; padding-bottom: 4rem; }
+    .is-hidden { display: none !important; }
+    .section-lg { padding-top: 6rem; padding-bottom: 6rem; }
+
+    /* ===== Navbar Landing Page (componente reutilizable) ===== */
+    .nav-landing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: transparent;
+      background-color: transparent;
+      min-height: 4rem;
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      transition: background-color 0.25s ease, background 0.25s ease;
+    }
+    .nav-landing.nav-landing--scrolled {
+      background: rgba(12, 41, 79, 0.95);
+      backdrop-filter: blur(8px);
+    }
+    .nav-landing-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 68rem;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .nav-landing-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .nav-landing-logo svg {
+      height: 58px;
+      width: auto;
+    }
+    .nav-landing-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-landing-ctas .btn {
+      font-size: 0.805rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: Mulish, sans-serif;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      color: var(--white);
+      background: var(--gradient-primary);
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-secondary {
+      color: var(--white);
+      background: var(--gradient-primary-soft);
+      border: 1px solid var(--border-secondary);
+    }
+    .btn-secondary:hover { border-color: rgba(33, 122, 237, 0.65); background: linear-gradient(45deg, rgba(109, 237, 88, 0.25), rgba(33, 122, 237, 0.4)); }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+    /* Pastilla (badge/pill, no es botón) */
+    .pastilla {
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: Mulish, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      background: var(--gradient-primary);
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-radius: 200px;
+      margin-bottom: 2rem;
+    }
+    .pastilla.pastilla-secundaria {
+      background: var(--gradient-primary-soft);
+      border: 1px solid var(--border-secondary);
+    }
+    .pastilla.pastilla-secundaria:hover {
+      border-color: rgba(33, 122, 237, 0.65);
+      background: linear-gradient(45deg, rgba(109, 237, 88, 0.25), rgba(33, 122, 237, 0.4));
+    }
+
+    /* Hero: sin margin-top para que el gradiente llegue al borde superior y no se vea el body detrás del navbar */
+    .hero {
+      background: var(--gradient-hero);
+      padding-top: 13rem;
+      padding-bottom: 4rem;
+    }
+    .hero-label { font-size: clamp(0.8125rem, 2vw, 0.9375rem); font-weight: 300; letter-spacing: 0.05em; text-transform: uppercase; color: var(--white-smoke); opacity: 0.95; text-align: left; margin: 0 0 1.38rem; display: block; }
+    .hero-headline { width: 600px; font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 600; line-height: 1.2; margin: 0 0 1.38rem; text-align: left; }
+    .hero-sub { font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); max-width: 36rem; margin: 0 0 2.76rem; text-align: left; }
+    .hero-cta { justify-content: flex-start; margin-top: 0; }
+    .video-section-inner {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+    .video-wrap {
+      flex: 0 0 min(800px, 100%);
+      max-width: 800px;
+      min-width: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: var(--blue-card);
+    }
+    .video-intro {
+      flex: 0 0 auto;
+      text-align: left;
+      min-width: 180px;
+    }
+    .video-intro-text {
+      font-family: Caveat, cursive;
+      font-size: clamp(1.31rem, 3vw, 1.875rem);
+      font-weight: 500;
+      color: white;
+      margin: 0;
+      display: block;
+      line-height: 1.25;
+      max-width: 10em;
+    }
+    .video-intro-arrow {
+      display: block;
+      margin: 0.5rem 0 0;
+      width: 100px;
+      height: 70px;
+    }
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: nowrap;
+    }
+    .hero-content {
+      flex: 1 1 min(100%, 28rem);
+      min-width: 0;
+    }
+    /* Bloque de 3 imágenes: separación +35% entre ellas, siguen solapadas */
+    .hero-visual {
+      flex: 0 1 auto;
+      width: min(100%, 420px);
+      margin-left: auto;
+      position: relative;
+      min-height: 17rem;
+      align-self: flex-start;
+    }
+    .hero_images-floating {
+      position: relative;
+      width: 100%;
+      min-height: 17rem;
+    }
+    .hero_images-floating img {
+      position: absolute;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+      object-fit: cover;
+    }
+    /* 1. Follaje (atrás, izq) */
+    .hero_images-floating .image-5 {
+      width: 16.75rem;
+      max-width: 100%;
+      top: 1.25rem;
+      right: 8.75rem;
+      z-index: 1;
+    }
+    /* 2. Edificio/calle (medio) */
+    .hero_images-floating .image-6 {
+      width: 16.75rem;
+      max-width: 100%;
+      top: 2.75rem;
+      right: 4.4rem;
+      z-index: 2;
+    }
+    /* 3. Café (delante, der) */
+    .hero_images-floating .image-7 {
+      width: 18rem;
+      max-width: 100%;
+      top: 0;
+      right: 0;
+      z-index: 3;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column; align-items: stretch; }
+      .hero-visual { max-width: 100%; width: 100%; margin-left: 0; min-height: 12rem; }
+      .hero_images-floating { min-height: 12rem; }
+      .hero_images-floating .image-5 { width: 13.25rem; right: 7rem; top: 1rem; }
+      .hero_images-floating .image-6 { width: 13.25rem; top: 2.25rem; right: 3.4rem; }
+      .hero_images-floating .image-7 { width: 14.5rem; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--blue-card);
+      border-radius: 20px;
+      padding: 2rem;
+      height: 100%;
+      min-height: 18rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card-title { font-size: 1.5rem; font-weight: 700; margin: 0 0 1rem; }
+    .card ul { margin: 0; padding-left: 1.25rem; }
+    .card li { margin-bottom: 0.5rem; }
+
+    /* Grids */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+    /* Typography */
+    h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; margin: 0 0 1rem; line-height: 1.2; }
+    .section-title-frase { font-family: Poppins, sans-serif; font-size: 50px; font-weight: 600; margin: 0; line-height: 1.2; text-align: center; }
+    .section-subtitle-frase { font-family: Poppins, sans-serif; font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); margin: 0.75rem auto 4rem; text-align: center; max-width: 36rem; }
+    .partner-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.875rem; margin-bottom: 6rem; }
+    .partner-logos img { width: 64px; height: 64px; object-fit: contain; }
+    .section-heading-left { font-family: Poppins, sans-serif; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; margin: 0 0 1.5rem; line-height: 1.2; text-align: left; }
+    .service-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 0; }
+    .service-card {
+      background: var(--blue-card);
+      border-radius: 20px;
+      padding: 2rem;
+      height: 100%;
+      min-height: 18rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .service-card-icon { width: 96px; height: 96px; object-fit: contain; margin-bottom: 1.25rem; }
+    .service-card-title { font-family: Poppins, sans-serif; font-size: 1.5rem; font-weight: 500; margin: 0 0 0.75rem; }
+    .service-card-desc { font-family: Poppins, sans-serif; font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); margin: 0; line-height: 1.5; }
+    .text-gradient { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .text-lead { font-size: 1.125rem; color: var(--white-smoke); margin-bottom: 1.5rem; max-width: 42rem; }
+
+    /* Frase sobre fondo diferente (full-width, rompe ritmo visual) */
+    .phrase-block {
+      width: 100%;
+      background: var(--blue-card);
+      padding: 3.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .phrase-block-inner {
+      margin-left: max(1.5rem, calc((100vw - 68rem) / 2));
+      margin-right: 42%;
+    }
+    .phrase-block-inner .container {
+      margin-left: 0;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .phrase-block .pastilla { margin-left: 0; margin-right: auto; margin-bottom: 0.75rem; }
+    .phrase-block h2 { margin-bottom: 0.75rem; }
+    .phrase-block .text-lead { margin-bottom: 0; }
+    .phrase-block .btn-group { margin-top: 1.5rem; }
+    .phrase-block-visual {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 42%;
+      min-width: 280px;
+      overflow: hidden;
+    }
+    .phrase-block-visual img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* CTA card (estilo nextrocket.io) */
+    .cta-card-wrap {
+      max-width: 68rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-card {
+      background: linear-gradient(273deg, #0f3463 0%, #163b6a 50%, #1a4280 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-height: 320px;
+    }
+    .cta-card-content {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cta-card-title { font-family: Poppins, sans-serif; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 500; color: var(--white); margin: 0 0 1rem; line-height: 1.2; }
+    .cta-card-desc { font-family: Poppins, sans-serif; font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); margin: 0 0 1.75rem; line-height: 1.6; max-width: 40rem; }
+    .cta-card .btn-group { margin-top: 0; }
+    .cta-card-visual {
+      flex: 0 0 42%;
+      max-width: 420px;
+      min-width: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card-visual img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Promise section */
+    .promise {
+      background: var(--gradient-promise);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .promise-text { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 600; line-height: 1.4; margin: 0; max-width: 36rem; margin-left: auto; margin-right: auto; }
+
+    /* CTA final */
+    .cta-split { align-items: start; }
+    .cta-box { padding: 2rem; }
+    .cta-box .btn { margin-top: 1rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: 500; margin-bottom: 0.25rem; font-size: 0.9375rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.5); }
+    .form-group select option { background: var(--midnight-blue); color: var(--white); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-submit { width: 100%; margin-top: 0.5rem; }
+
+    /* How it works */
+    .how-invest { margin-top: 1.5rem; font-size: 1.125rem; color: var(--white-smoke); }
+    .how-invest strong { color: var(--white); }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .footer-logo svg { height: 32px; width: auto; opacity: 0.9; }
+    .footer a { color: var(--white-smoke); text-decoration: none; }
+    .footer a:hover { color: var(--white); text-decoration: underline; }
+    .footer-copy { font-size: 0.875rem; color: var(--white-smoke); }
+
+    /* Zigzag: ¿Qué incluye el programa? */
+    .zigzag-section { padding-top: 5rem; padding-bottom: 5rem; }
+    .zigzag-section .section-heading { font-family: Poppins, sans-serif; font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 600; margin: 0 0 3rem; text-align: center; line-height: 1.2; }
+    .zigzag-block {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 5rem;
+      width: 100%;
+    }
+    .zigzag-block:last-child { margin-bottom: 0; }
+    .zigzag-block--reverse { flex-direction: row-reverse; }
+    .zigzag-content { flex: 1 1 50%; min-width: 0; }
+    .zigzag-content h3 { font-family: Poppins, sans-serif; font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 500; margin: 0 0 1rem; line-height: 1.3; color: var(--white); }
+    .zigzag-content p { font-family: Poppins, sans-serif; font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); margin: 0; line-height: 1.6; }
+    .zigzag-media { flex: 1 1 50%; min-width: 0; }
+    .zigzag-placeholder {
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.45);
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3, .service-cards { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .cta-split .cta-box:first-child { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2rem; }
+      .cta-card { flex-direction: column; min-height: 0; }
+      .cta-card-content { padding: 2.5rem 2rem; }
+      .cta-card-visual { flex: none; width: 100%; max-width: none; min-width: 0; height: 280px; }
+      .zigzag-block, .zigzag-block--reverse { flex-direction: column; margin-bottom: 4rem; gap: 1.5rem; }
+      .zigzag-media { order: -1; }
+    }
+    @media (max-width: 600px) {
+      .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .section { padding-top: 3rem; padding-bottom: 3rem; }
+      .hero { padding-top: 5rem; padding-bottom: 3rem; }
+      .btn-group { flex-direction: column; align-items: stretch; }
+      .btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Navbar Landing Page (componente reutilizable) -->
+  <nav class="nav-landing" role="banner" aria-label="Navegación principal">
+    <div class="nav-landing-inner">
+      <a href="https://www.nextrocket.io/" class="nav-landing-logo" aria-label="Next Rocket">
+        <svg width="110" height="61" viewBox="0 0 110 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3.792 57.084C3.176 57.084 2.624 56.984 2.136 56.784C1.648 56.584 1.256 56.288 0.96 55.896C0.672 55.504 0.52 55.032 0.504 54.48H2.688C2.72 54.792 2.828 55.032 3.012 55.2C3.196 55.36 3.436 55.44 3.732 55.44C4.036 55.44 4.276 55.372 4.452 55.236C4.628 55.092 4.716 54.896 4.716 54.648C4.716 54.44 4.644 54.268 4.5 54.132C4.364 53.996 4.192 53.884 3.984 53.796C3.784 53.708 3.496 53.608 3.12 53.496C2.576 53.328 2.132 53.16 1.788 52.992C1.444 52.824 1.148 52.576 0.9 52.248C0.652 51.92 0.528 51.492 0.528 50.964C0.528 50.18 0.812 49.568 1.38 49.128C1.948 48.68 2.688 48.456 3.6 48.456C4.528 48.456 5.276 48.68 5.844 49.128C6.412 49.568 6.716 50.184 6.756 50.976H4.536C4.52 50.704 4.42 50.492 4.236 50.34C4.052 50.18 3.816 50.1 3.528 50.1C3.28 50.1 3.08 50.168 2.928 50.304C2.776 50.432 2.7 50.62 2.7 50.868C2.7 51.14 2.828 51.352 3.084 51.504C3.34 51.656 3.74 51.82 4.284 51.996C4.828 52.18 5.268 52.356 5.604 52.524C5.948 52.692 6.244 52.936 6.492 53.256C6.74 53.576 6.864 53.988 6.864 54.492C6.864 54.972 6.74 55.408 6.492 55.8C6.252 56.192 5.9 56.504 5.436 56.736C4.972 56.968 4.424 57.084 3.792 57.084ZM16.1068 48.576V50.22H13.8748V57H11.8228V50.22H9.59081V48.576H16.1068ZM21.0727 48.576V53.616C21.0727 54.12 21.1967 54.508 21.4447 54.78C21.6927 55.052 22.0567 55.188 22.5367 55.188C23.0167 55.188 23.3847 55.052 23.6407 54.78C23.8967 54.508 24.0247 54.12 24.0247 53.616V48.576H26.0767V53.604C26.0767 54.356 25.9167 54.992 25.5967 55.512C25.2767 56.032 24.8447 56.424 24.3007 56.688C23.7647 56.952 23.1647 57.084 22.5007 57.084C21.8367 57.084 21.2407 56.956 20.7127 56.7C20.1927 56.436 19.7807 56.044 19.4767 55.524C19.1727 54.996 19.0207 54.356 19.0207 53.604V48.576H21.0727ZM32.5936 48.576C33.4816 48.576 34.2576 48.752 34.9216 49.104C35.5856 49.456 36.0976 49.952 36.4576 50.592C36.8256 51.224 37.0096 51.956 37.0096 52.788C37.0096 53.612 36.8256 54.344 36.4576 54.984C36.0976 55.624 35.5816 56.12 34.9096 56.472C34.2456 56.824 33.4736 57 32.5936 57H29.4376V48.576H32.5936ZM32.4616 55.224C33.2376 55.224 33.8416 55.012 34.2736 54.588C34.7056 54.164 34.9216 53.564 34.9216 52.788C34.9216 52.012 34.7056 51.408 34.2736 50.976C33.8416 50.544 33.2376 50.328 32.4616 50.328H31.4896V55.224H32.4616ZM42.1283 48.576V57H40.0763V48.576H42.1283ZM49.5194 57.084C48.7274 57.084 47.9994 56.9 47.3354 56.532C46.6794 56.164 46.1554 55.652 45.7634 54.996C45.3794 54.332 45.1874 53.588 45.1874 52.764C45.1874 51.94 45.3794 51.2 45.7634 50.544C46.1554 49.888 46.6794 49.376 47.3354 49.008C47.9994 48.64 48.7274 48.456 49.5194 48.456C50.3114 48.456 51.0354 48.64 51.6914 49.008C52.3554 49.376 52.8754 49.888 53.2514 50.544C53.6354 51.2 53.8274 51.94 53.8274 52.764C53.8274 53.588 53.6354 54.332 53.2514 54.996C52.8674 55.652 52.3474 56.164 51.6914 56.532C51.0354 56.9 50.3114 57.084 49.5194 57.084ZM49.5194 55.212C50.1914 55.212 50.7274 54.988 51.1274 54.54C51.5354 54.092 51.7394 53.5 51.7394 52.764C51.7394 52.02 51.5354 51.428 51.1274 50.988C50.7274 50.54 50.1914 50.316 49.5194 50.316C48.8394 50.316 48.2954 50.536 47.8874 50.976C47.4874 51.416 47.2874 52.012 47.2874 52.764C47.2874 53.508 47.4874 54.104 47.8874 54.552C48.2954 54.992 48.8394 55.212 49.5194 55.212Z" fill="url(#logoGradNav)"/>
+          <path d="M12.42 17H9.342L4.194 9.206V17H1.116V4.364H4.194L9.342 12.194V4.364H12.42V17ZM20.2492 6.83V9.386H24.3712V11.762H20.2492V14.534H24.9112V17H17.1712V4.364H24.9112V6.83H20.2492ZM37.1694 17L34.5954 13.13L32.3274 17H28.8354L32.8854 10.574L28.7454 4.364H32.3274L34.8654 8.18L37.0974 4.364H40.5894L36.5754 10.736L40.7514 17H37.1694ZM53.9066 4.364V6.83H50.5586V17H47.4806V6.83H44.1326V4.364H53.9066ZM7.56 39L4.932 34.23H4.194V39H1.116V26.364H6.282C7.278 26.364 8.124 26.538 8.82 26.886C9.528 27.234 10.056 27.714 10.404 28.326C10.752 28.926 10.926 29.598 10.926 30.342C10.926 31.182 10.686 31.932 10.206 32.592C9.738 33.252 9.042 33.72 8.118 33.996L11.034 39H7.56ZM4.194 32.052H6.102C6.666 32.052 7.086 31.914 7.362 31.638C7.65 31.362 7.794 30.972 7.794 30.468C7.794 29.988 7.65 29.61 7.362 29.334C7.086 29.058 6.666 28.92 6.102 28.92H4.194V32.052ZM21.3542 39.126C20.1662 39.126 19.0742 38.85 18.0782 38.298C17.0942 37.746 16.3082 36.978 15.7202 35.994C15.1442 34.998 14.8562 33.882 14.8562 32.646C14.8562 31.41 15.1442 30.3 15.7202 29.316C16.3082 28.332 17.0942 27.564 18.0782 27.012C19.0742 26.46 20.1662 26.184 21.3542 26.184C22.5422 26.184 23.6282 26.46 24.6122 27.012C25.6082 27.564 26.3882 28.332 26.9522 29.316C27.5282 30.3 27.8162 31.41 27.8162 32.646C27.8162 33.882 27.5282 34.998 26.9522 35.994C26.3762 36.978 25.5962 37.746 24.6122 38.298C23.6282 38.85 22.5422 39.126 21.3542 39.126ZM21.3542 36.318C22.3622 36.318 23.1662 35.982 23.7662 35.31C24.3782 34.638 24.6842 33.75 24.6842 32.646C24.6842 31.53 24.3782 30.642 23.7662 29.982C23.1662 29.31 22.3622 28.974 21.3542 28.974C20.3342 28.974 19.5182 29.304 18.9062 29.964C18.3062 30.624 18.0062 31.518 18.0062 32.646C18.0062 33.762 18.3062 34.656 18.9062 35.328C19.5182 35.988 20.3342 36.318 21.3542 36.318ZM31.5266 32.664C31.5266 31.416 31.7966 30.306 32.3366 29.334C32.8766 28.35 33.6266 27.588 34.5866 27.048C35.5586 26.496 36.6566 26.22 37.8806 26.22C39.3806 26.22 40.6646 26.616 41.7326 27.408C42.8006 28.2 43.5146 29.28 43.8746 30.648H40.4906C40.2386 30.12 39.8786 29.718 39.4106 29.442C38.9546 29.166 38.4326 29.028 37.8446 29.028C36.8966 29.028 36.1286 29.358 35.5406 30.018C34.9526 30.678 34.6586 31.56 34.6586 32.664C34.6586 33.768 34.9526 34.65 35.5406 35.31C36.1286 35.97 36.8966 36.3 37.8446 36.3C38.4326 36.3 38.9546 36.162 39.4106 35.886C39.8786 35.61 40.2386 35.208 40.4906 34.68H43.8746C43.5146 36.048 42.8006 37.128 41.7326 37.92C40.6646 38.7 39.3806 39.09 37.8806 39.09C36.6566 39.09 35.5586 38.82 34.5866 38.28C33.6266 37.728 32.8766 36.966 32.3366 35.994C31.7966 35.022 31.5266 33.912 31.5266 32.664ZM55.6055 39L51.3575 33.42V39H48.2795V26.364H51.3575V31.908L55.5695 26.364H59.1875L54.2915 32.556L59.3675 39H55.6055ZM66.4283 28.83V31.386H70.5503V33.762H66.4283V36.534H71.0903V39H63.3503V26.364H71.0903V28.83H66.4283ZM84.6986 26.364V28.83H81.3506V39H78.2726V28.83H74.9246V26.364H84.6986Z" fill="white"/>
+          <defs><linearGradient id="logoGradNav" x1="72" y1="45" x2="-8" y2="64.5" gradientUnits="userSpaceOnUse"><stop stop-color="#2DC72F"/><stop offset="1" stop-color="#E05CEB"/></linearGradient></defs>
+        </svg>
+      </a>
+      <div class="nav-landing-ctas">
+        <a href="#" class="btn btn-secondary">Sesión de Estrategia 1:1</a>
+        <a href="#postular" class="btn btn-primary">Postular al programa</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 2. Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="hero-label">Consultoría de Estrategia de Producto</span>
+          <h1 class="hero-headline">Tu idea de negocio, aterrizada y lista para vender en semanas</h1>
+          <p class="hero-sub">Estrategia y Prototipo. Luego de este programa, tendrás todo para buscar a tus primeros clientes.</p>
+          <div class="btn-group hero-cta">
+            <a href="#postular" class="btn btn-primary">Postular al programa</a>
+            <a href="#video" class="btn btn-secondary">Ver video</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero_images-floating">
+            <img src="https://cdn.prod.website-files.com/63f8c33230b3da16480065c5/640ca9feba45fe83ed8e48a8_image_blog-1.webp" loading="lazy" alt="" class="image-5">
+            <img src="https://cdn.prod.website-files.com/63f8c33230b3da16480065c5/640ca9fe9747f4d0b2bc09aa_image_blog-2.webp" loading="lazy" alt="" class="image-6">
+            <img src="https://cdn.prod.website-files.com/63f8c33230b3da16480065c5/640ca9fef79bec7ad244eebd_image_blog-3.webp" loading="lazy" alt="" class="image-7">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Video -->
+  <section class="section section-video" id="video">
+    <div class="container">
+      <div class="video-section-inner">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/PWuQqOoHedk?si=tKja2m_SysmPL5zw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-intro">
+          <p class="video-intro-text">Unas palabras de<br>Fernando</p>
+          <svg class="video-intro-arrow" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M50 8 C50 25 35 35 25 42 C15 50 10 58 12 65" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-linejoin="round"/>
+            <path d="M12 65 L8 58 L16 62 Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Frase del problema -->
+  <section class="section" id="frase-problema">
+    <div class="container">
+      <span class="pastilla pastilla-secundaria">Aprovecha las herramientas de IA</span>
+      <h2 class="section-title-frase">Tener una idea no es suficiente, primero debes validar.</h2>
+      <p class="section-subtitle-frase">Un MVP puede costarte entre US$6mil y US$25mil dólares. Si no tienes estrategia, validación o clientes interesados, puede ser un riesgo enorme.</p>
+      <div class="partner-logos" aria-label="Logos de partners">
+        <img src="assets/lovable-33eb739e-f44e-4191-b7c0-7dfb4b1526c7.png" alt="Lovable" width="64" height="64">
+        <img src="assets/supabase-d016fbd6-3c8f-49c8-b4f4-de2a1f59f949.png" alt="Supabase" width="64" height="64">
+        <img src="assets/claude-2fa4793c-55c8-4c08-9139-e6a9a7496f37.png" alt="Claude" width="64" height="64">
+        <img src="assets/vercel-logo.png" alt="Vercel" width="64" height="64">
+      </div>
+      <h2 class="section-heading-left">¿Cuál es el problema?</h2>
+      <div class="service-cards">
+        <div class="service-card">
+          <img src="assets/icon-mvp.png" alt="" class="service-card-icon" width="96" height="96">
+          <h3 class="service-card-title">No sabes a quién venderle</h3>
+          <p class="service-card-desc">Tienes la idea, pero no conoces a tu cliente ideal.</p>
+        </div>
+        <div class="service-card">
+          <img src="assets/icon-web.png" alt="" class="service-card-icon" width="96" height="96">
+          <h3 class="service-card-title">No sabes qué construir</h3>
+          <p class="service-card-desc">Sin claridad de producto, gastas en lo que no importa.</p>
+        </div>
+        <div class="service-card">
+          <img src="assets/icon-app.png" alt="" class="service-card-icon" width="96" height="96">
+          <h3 class="service-card-title">No puedes vender sin prototipo</h3>
+          <p class="service-card-desc">Sin algo tangible, nadie te va a creer ni comprar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frase: Por eso creamos este programa (bloque full-width, fondo card) -->
+  <section class="phrase-block" id="por-eso-creamos">
+    <div class="phrase-block-inner">
+      <div class="container">
+        <span class="pastilla pastilla-secundaria">Lo hacemos por ti</span>
+        <h2>Por eso creamos este programa</h2>
+        <p class="text-lead">Nos metemos en tu negocio, analizamos tu idea y te entregamos estrategia, prototipo y todo lo que necesitas para conseguir tus primeros clientes — antes de invertir un solo dólar en desarrollo.</p>
+        <div class="btn-group">
+          <a href="#postular" class="btn btn-primary">Postular al programa</a>
+          <a href="#" class="btn btn-secondary">Sesión de Estrategia 1:1</a>
+        </div>
+      </div>
+    </div>
+    <div class="phrase-block-visual">
+      <img src="assets/lineas.png" alt="" width="420" height="280">
+    </div>
+  </section>
+
+  <!-- 4.5 Lo hacemos por ti (card CTA) — oculto por ahora, quitar clase is-hidden para mostrar -->
+  <section class="section is-hidden" id="lo-hacemos">
+    <div class="container">
+      <div class="cta-card-wrap">
+        <div class="cta-card">
+          <div class="cta-card-content">
+            <h2 class="cta-card-title">Lo hacemos por ti.</h2>
+            <p class="cta-card-desc">Nos metemos en tu negocio, analizamos tu idea y te entregamos estrategia, prototipo y todo lo que necesitas para conseguir tus primeros clientes — antes de invertir un solo dólar en desarrollo.</p>
+            <div class="btn-group">
+              <a href="#postular" class="btn btn-primary">Postular al programa</a>
+              <a href="#" class="btn btn-secondary">Sesión de Estrategia 1:1</a>
+            </div>
+          </div>
+          <div class="cta-card-visual">
+            <img src="assets/cta-collage.png" alt="Estrategia, prototipo y ventas — lo hacemos por ti" width="380" height="260">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué incluye el programa (zigzag) -->
+  <section class="section zigzag-section" id="que-incluye-programa">
+    <div class="container">
+      <h2 class="section-heading zigzag-section-heading">¿Qué incluye el programa?</h2>
+      <div class="zigzag-block">
+        <div class="zigzag-content">
+          <h3>Estrategia de negocio</h3>
+          <p>Convertimos tu idea en un modelo claro y viable. Propuesta de valor, cliente ideal, pricing y proyección de retorno para el primer año.</p>
+        </div>
+        <div class="zigzag-media">
+          <div class="zigzag-placeholder">Modelo de negocio</div>
+        </div>
+      </div>
+      <div class="zigzag-block zigzag-block--reverse">
+        <div class="zigzag-content">
+          <h3>Estrategia de producto</h3>
+          <p>Definimos qué construir, en qué orden y cómo hacerlo tangible. Sales con un prototipo navegable listo para mostrarle a clientes.</p>
+        </div>
+        <div class="zigzag-media">
+          <div class="zigzag-placeholder">Prototipo navegable</div>
+        </div>
+      </div>
+      <div class="zigzag-block">
+        <div class="zigzag-content">
+          <h3>Activos de venta</h3>
+          <p>Todo lo que necesitas para salir a vender antes de tener el producto listo. Landing, demo, script de ventas y lista de prospectos.</p>
+        </div>
+        <div class="zigzag-media">
+          <div class="zigzag-placeholder">Activos de venta</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Qué incluye -->
+  <section class="section">
+    <div class="container">
+      <h2>Qué incluye</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3 class="card-title">Estrategia de negocio</h3>
+          <ul>
+            <li>Propuesta de valor definida</li>
+            <li>Cliente ideal identificado</li>
+            <li>Oportunidades de mercado</li>
+            <li>Modelo de pricing</li>
+            <li>Estimación de ventas año 1</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Estrategia de producto</h3>
+          <ul>
+            <li>Funcionalidades core del MVP</li>
+            <li>Flujo y arquitectura del producto</li>
+            <li>Prototipo demo navegable listo para mostrar a clientes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Activos de venta</h3>
+          <ul>
+            <li>Landing page para lista de espera</li>
+            <li>Demo funcional</li>
+            <li>Role play de ventas</li>
+            <li>Script de ventas B2B</li>
+            <li>Lista de primeros prospectos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Cómo funciona -->
+  <section class="section">
+    <div class="container">
+      <h2>Cómo funciona</h2>
+      <p class="text-lead">Combinación de sesiones en vivo con el equipo de Next Rocket + entregables asincrónicos. Grupos pequeños de 2 a 5 empresarios.</p>
+      <p class="how-invest"><strong>Inversión:</strong> LATAM $2,000 USD — US $5,000 USD</p>
+    </div>
+  </section>
+
+  <!-- 8. Promesa -->
+  <section class="section">
+    <div class="container">
+      <div class="promise">
+        <p class="promise-text">Cuando termines, vas a poder levantar inversión, conseguir socios y salir a vender con una promesa real de entrega — sin haber gastado un peso en desarrollo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA final -->
+  <section class="section section-lg" id="postular">
+    <div class="container">
+      <div class="grid-2 cta-split">
+        <div class="cta-box">
+          <h2>Agendar llamada exploratoria</h2>
+          <p class="text-lead">¿Quieres saber si este programa es para ti? Agenda una llamada de 45 minutos con nuestro equipo.</p>
+          <a href="https://calendly.com/" class="btn btn-primary" target="_blank" rel="noopener">Agendar llamada — $80</a>
+        </div>
+        <div class="cta-box">
+          <h2>Postular al programa</h2>
+          <form action="#" method="post" id="form-postular">
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            </div>
+            <div class="form-group">
+              <label for="idea">¿Cuál es tu idea de negocio?</label>
+              <textarea id="idea" name="idea" placeholder="Describe tu idea en pocas líneas..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="etapa">¿En qué etapa estás?</label>
+              <select id="etapa" name="etapa" required>
+                <option value="">Selecciona</option>
+                <option value="idea">Solo tengo la idea</option>
+                <option value="investigacion">Ya hice algo de investigación</option>
+                <option value="prototipo">Tengo un prototipo básico</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mercado">¿Tu mercado objetivo es LATAM o US?</label>
+              <select id="mercado" name="mercado" required>
+                <option value="">Selecciona</option>
+                <option value="latam">LATAM</option>
+                <option value="us">US</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">Enviar postulación</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="https://www.nextrocket.io/" class="footer-logo" aria-label="Next Rocket">
+          <svg width="110" height="61" viewBox="0 0 110 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.792 57.084C3.176 57.084 2.624 56.984 2.136 56.784C1.648 56.584 1.256 56.288 0.96 55.896C0.672 55.504 0.52 55.032 0.504 54.48H2.688C2.72 54.792 2.828 55.032 3.012 55.2C3.196 55.36 3.436 55.44 3.732 55.44C4.036 55.44 4.276 55.372 4.452 55.236C4.628 55.092 4.716 54.896 4.716 54.648C4.716 54.44 4.644 54.268 4.5 54.132C4.364 53.996 4.192 53.884 3.984 53.796C3.784 53.708 3.496 53.608 3.12 53.496C2.576 53.328 2.132 53.16 1.788 52.992C1.444 52.824 1.148 52.576 0.9 52.248C0.652 51.92 0.528 51.492 0.528 50.964C0.528 50.18 0.812 49.568 1.38 49.128C1.948 48.68 2.688 48.456 3.6 48.456C4.528 48.456 5.276 48.68 5.844 49.128C6.412 49.568 6.716 50.184 6.756 50.976H4.536C4.52 50.704 4.42 50.492 4.236 50.34C4.052 50.18 3.816 50.1 3.528 50.1C3.28 50.1 3.08 50.168 2.928 50.304C2.776 50.432 2.7 50.62 2.7 50.868C2.7 51.14 2.828 51.352 3.084 51.504C3.34 51.656 3.74 51.82 4.284 51.996C4.828 52.18 5.268 52.356 5.604 52.524C5.948 52.692 6.244 52.936 6.492 53.256C6.74 53.576 6.864 53.988 6.864 54.492C6.864 54.972 6.74 55.408 6.492 55.8C6.252 56.192 5.9 56.504 5.436 56.736C4.972 56.968 4.424 57.084 3.792 57.084ZM16.1068 48.576V50.22H13.8748V57H11.8228V50.22H9.59081V48.576H16.1068ZM21.0727 48.576V53.616C21.0727 54.12 21.1967 54.508 21.4447 54.78C21.6927 55.052 22.0567 55.188 22.5367 55.188C23.0167 55.188 23.3847 55.052 23.6407 54.78C23.8967 54.508 24.0247 54.12 24.0247 53.616V48.576H26.0767V53.604C26.0767 54.356 25.9167 54.992 25.5967 55.512C25.2767 56.032 24.8447 56.424 24.3007 56.688C23.7647 56.952 23.1647 57.084 22.5007 57.084C21.8367 57.084 21.2407 56.956 20.7127 56.7C20.1927 56.436 19.7807 56.044 19.4767 55.524C19.1727 54.996 19.0207 54.356 19.0207 53.604V48.576H21.0727ZM32.5936 48.576C33.4816 48.576 34.2576 48.752 34.9216 49.104C35.5856 49.456 36.0976 49.952 36.4576 50.592C36.8256 51.224 37.0096 51.956 37.0096 52.788C37.0096 53.612 36.8256 54.344 36.4576 54.984C36.0976 55.624 35.5816 56.12 34.9096 56.472C34.2456 56.824 33.4736 57 32.5936 57H29.4376V48.576H32.5936ZM32.4616 55.224C33.2376 55.224 33.8416 55.012 34.2736 54.588C34.7056 54.164 34.9216 53.564 34.9216 52.788C34.9216 52.012 34.7056 51.408 34.2736 50.976C33.8416 50.544 33.2376 50.328 32.4616 50.328H31.4896V55.224H32.4616ZM42.1283 48.576V57H40.0763V48.576H42.1283ZM49.5194 57.084C48.7274 57.084 47.9994 56.9 47.3354 56.532C46.6794 56.164 46.1554 55.652 45.7634 54.996C45.3794 54.332 45.1874 53.588 45.1874 52.764C45.1874 51.94 45.3794 51.2 45.7634 50.544C46.1554 49.888 46.6794 49.376 47.3354 49.008C47.9994 48.64 48.7274 48.456 49.5194 48.456C50.3114 48.456 51.0354 48.64 51.6914 49.008C52.3554 49.376 52.8754 49.888 53.2514 50.544C53.6354 51.2 53.8274 51.94 53.8274 52.764C53.8274 53.588 53.6354 54.332 53.2514 54.996C52.8674 55.652 52.3474 56.164 51.6914 56.532C51.0354 56.9 50.3114 57.084 49.5194 57.084ZM49.5194 55.212C50.1914 55.212 50.7274 54.988 51.1274 54.54C51.5354 54.092 51.7394 53.5 51.7394 52.764C51.7394 52.02 51.5354 51.428 51.1274 50.988C50.7274 50.54 50.1914 50.316 49.5194 50.316C48.8394 50.316 48.2954 50.536 47.8874 50.976C47.4874 51.416 47.2874 52.012 47.2874 52.764C47.2874 53.508 47.4874 54.104 47.8874 54.552C48.2954 54.992 48.8394 55.212 49.5194 55.212Z" fill="url(#logoGradFooter)"/>
+            <path d="M12.42 17H9.342L4.194 9.206V17H1.116V4.364H4.194L9.342 12.194V4.364H12.42V17ZM20.2492 6.83V9.386H24.3712V11.762H20.2492V14.534H24.9112V17H17.1712V4.364H24.9112V6.83H20.2492ZM37.1694 17L34.5954 13.13L32.3274 17H28.8354L32.8854 10.574L28.7454 4.364H32.3274L34.8654 8.18L37.0974 4.364H40.5894L36.5754 10.736L40.7514 17H37.1694ZM53.9066 4.364V6.83H50.5586V17H47.4806V6.83H44.1326V4.364H53.9066ZM7.56 39L4.932 34.23H4.194V39H1.116V26.364H6.282C7.278 26.364 8.124 26.538 8.82 26.886C9.528 27.234 10.056 27.714 10.404 28.326C10.752 28.926 10.926 29.598 10.926 30.342C10.926 31.182 10.686 31.932 10.206 32.592C9.738 33.252 9.042 33.72 8.118 33.996L11.034 39H7.56ZM4.194 32.052H6.102C6.666 32.052 7.086 31.914 7.362 31.638C7.65 31.362 7.794 30.972 7.794 30.468C7.794 29.988 7.65 29.61 7.362 29.334C7.086 29.058 6.666 28.92 6.102 28.92H4.194V32.052ZM21.3542 39.126C20.1662 39.126 19.0742 38.85 18.0782 38.298C17.0942 37.746 16.3082 36.978 15.7202 35.994C15.1442 34.998 14.8562 33.882 14.8562 32.646C14.8562 31.41 15.1442 30.3 15.7202 29.316C16.3082 28.332 17.0942 27.564 18.0782 27.012C19.0742 26.46 20.1662 26.184 21.3542 26.184C22.5422 26.184 23.6282 26.46 24.6122 27.012C25.6082 27.564 26.3882 28.332 26.9522 29.316C27.5282 30.3 27.8162 31.41 27.8162 32.646C27.8162 33.882 27.5282 34.998 26.9522 35.994C26.3762 36.978 25.5962 37.746 24.6122 38.298C23.6282 38.85 22.5422 39.126 21.3542 39.126ZM21.3542 36.318C22.3622 36.318 23.1662 35.982 23.7662 35.31C24.3782 34.638 24.6842 33.75 24.6842 32.646C24.6842 31.53 24.3782 30.642 23.7662 29.982C23.1662 29.31 22.3622 28.974 21.3542 28.974C20.3342 28.974 19.5182 29.304 18.9062 29.964C18.3062 30.624 18.0062 31.518 18.0062 32.646C18.0062 33.762 18.3062 34.656 18.9062 35.328C19.5182 35.988 20.3342 36.318 21.3542 36.318ZM31.5266 32.664C31.5266 31.416 31.7966 30.306 32.3366 29.334C32.8766 28.35 33.6266 27.588 34.5866 27.048C35.5586 26.496 36.6566 26.22 37.8806 26.22C39.3806 26.22 40.6646 26.616 41.7326 27.408C42.8006 28.2 43.5146 29.28 43.8746 30.648H40.4906C40.2386 30.12 39.8786 29.718 39.4106 29.442C38.9546 29.166 38.4326 29.028 37.8446 29.028C36.8966 29.028 36.1286 29.358 35.5406 30.018C34.9526 30.678 34.6586 31.56 34.6586 32.664C34.6586 33.768 34.9526 34.65 35.5406 35.31C36.1286 35.97 36.8966 36.3 37.8446 36.3C38.4326 36.3 38.9546 36.162 39.4106 35.886C39.8786 35.61 40.2386 35.208 40.4906 34.68H43.8746C43.5146 36.048 42.8006 37.128 41.7326 37.92C40.6646 38.7 39.3806 39.09 37.8806 39.09C36.6566 39.09 35.5586 38.82 34.5866 38.28C33.6266 37.728 32.8766 36.966 32.3366 35.994C31.7966 35.022 31.5266 33.912 31.5266 32.664ZM55.6055 39L51.3575 33.42V39H48.2795V26.364H51.3575V31.908L55.5695 26.364H59.1875L54.2915 32.556L59.3675 39H55.6055ZM66.4283 28.83V31.386H70.5503V33.762H66.4283V36.534H71.0903V39H63.3503V26.364H71.0903V28.83H66.4283ZM84.6986 26.364V28.83H81.3506V39H78.2726V28.83H74.9246V26.364H84.6986Z" fill="white"/>
+            <defs><linearGradient id="logoGradFooter" x1="72" y1="45" x2="-8" y2="64.5" gradientUnits="userSpaceOnUse"><stop stop-color="#2DC72F"/><stop offset="1" stop-color="#E05CEB"/></linearGradient></defs>
+          </svg>
+        </a>
+        <div class="footer-copy">Next Rocket · <a href="https://www.nextrocket.io/">nextrocket.io</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var nav = document.querySelector('.nav-landing');
+      if (!nav) return;
+      function onScroll() {
+        if (window.scrollY > 20) {
+          nav.classList.add('nav-landing--scrolled');
+        } else {
+          nav.classList.remove('nav-landing--scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    document.getElementById('form-postular').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por tu interés. Te contactaremos pronto.');
+    });
+  </script>
+</body>
+</html>
