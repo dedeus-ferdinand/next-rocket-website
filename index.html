@@ -59,7 +59,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 10000;
       background: transparent;
       background-color: transparent;
       min-height: 4rem;
@@ -91,6 +91,24 @@
     .nav-landing-logo svg {
       height: 58px;
       width: auto;
+    }
+    .nav-landing-links {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-landing-links a {
+      font-family: Poppins, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-landing-links a:hover {
+      color: var(--white-smoke);
+      opacity: 0.9;
     }
     .nav-landing-ctas {
       display: flex;
@@ -128,6 +146,9 @@
     .nav-landing--open .nav-burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .nav-drawer {
       display: none;
+    }
+    @media (min-width: 768px) {
+      .nav-landing-links { display: flex; }
     }
 
     /* Buttons */
@@ -341,7 +362,20 @@
     .section-title-frase { font-family: Poppins, sans-serif; font-size: clamp(1.75rem, 5vw, 3.125rem); font-weight: 600; margin: 0; line-height: 1.2; text-align: center; }
     .section-subtitle-frase { font-family: Poppins, sans-serif; font-size: 1.125rem; font-weight: 300; color: var(--white-smoke); margin: 0.75rem auto 4rem; text-align: center; max-width: 36rem; }
     .partner-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.875rem; margin-bottom: 6rem; }
-    .partner-logos img { width: 64px; height: 64px; object-fit: contain; }
+    .partner-logos img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      animation: partner-logo-float 3.2s ease-in-out infinite;
+    }
+    .partner-logos img:nth-child(1) { animation-delay: 0s; }
+    .partner-logos img:nth-child(2) { animation-delay: 0.4s; }
+    .partner-logos img:nth-child(3) { animation-delay: 0.8s; }
+    .partner-logos img:nth-child(4) { animation-delay: 0.2s; }
+    @keyframes partner-logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
     .section-heading-left { font-family: Poppins, sans-serif; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; margin: 0 0 1.5rem; line-height: 1.2; text-align: left; }
     .service-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 0; }
     .service-card {
@@ -485,17 +519,129 @@
     .how-invest { margin-top: 1.5rem; font-size: 1.125rem; color: var(--white-smoke); }
     .how-invest strong { color: var(--white); }
 
-    /* Footer */
+    /* Footer (CTA + copyright como en diseño) */
     .footer {
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding: 2rem 0;
+      border-top: 1px solid #94A3B8;
+      padding: 3rem 0 2rem;
       margin-top: 4rem;
+      background: var(--midnight-blue);
     }
-    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-    .footer-logo svg { height: 32px; width: auto; opacity: 0.9; }
-    .footer a { color: var(--white-smoke); text-decoration: none; }
-    .footer a:hover { color: var(--white); text-decoration: underline; }
-    .footer-copy { font-size: 0.875rem; color: var(--white-smoke); }
+    .footer-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-cta-text { flex: 1 1 280px; min-width: 0; }
+    .footer-cta h2 {
+      font-family: Poppins, sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--white);
+      margin: 0 0 0.75rem;
+    }
+    .footer-cta .footer-lead { font-size: 1.125rem; color: var(--white-smoke); margin: 0; font-weight: 300; }
+    .footer-cta .btn { flex-shrink: 0; }
+    .footer-copy { font-size: 0.875rem; color: var(--white-smoke); margin: 0; }
+    @media (max-width: 768px) {
+      .footer-cta { flex-direction: column; align-items: stretch; text-align: left; margin-bottom: 2.5rem; }
+      .footer-cta .btn { align-self: center; width: 100%; max-width: 280px; }
+    }
+
+    /* Pricing */
+    .pricing-section { padding-top: 0; padding-bottom: 5rem; }
+    .pricing-header {
+      padding: 3rem 1.5rem;
+      margin: 0 -1.5rem 3rem;
+      text-align: center;
+    }
+    .pricing-heading {
+      font-family: Poppins, sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 0.5rem;
+      line-height: 1.3;
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pricing-heading-subtitle {
+      font-family: Poppins, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--white-smoke);
+      margin: 0;
+      line-height: 1.4;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    .pricing-card {
+      background: var(--blue-card);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: var(--white);
+    }
+    .pricing-card--popular { box-shadow: 0 8px 32px rgba(88, 97, 237, 0.25); padding-top: 2.25rem; }
+    .pricing-card--popular .pastilla {
+      position: absolute;
+      top: -0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+    }
+    .pricing-card-title {
+      font-family: Poppins, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--white);
+      margin: 0 0 0.5rem;
+    }
+    .pricing-card-price {
+      font-family: Poppins, sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.75rem;
+    }
+    .pricing-card-subtitle {
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--white);
+      margin: 0 0 0.75rem;
+      line-height: 1.4;
+    }
+    .pricing-card-desc {
+      font-size: 0.9375rem;
+      font-weight: 200;
+      color: var(--white-smoke);
+      margin: 0 0 1.5rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .pricing-card-cta {
+      display: block;
+      text-align: center;
+      padding: 0.875rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 500;
+      margin-top: auto;
+      text-decoration: none;
+    }
+    @media (max-width: 900px) {
+      .pricing-cards { grid-template-columns: 1fr; max-width: 22rem; margin-left: auto; margin-right: auto; }
+    }
 
     /* Zigzag: ¿Qué incluye el programa? */
     .zigzag-section { padding-top: 5rem; padding-bottom: 5rem; }
@@ -527,6 +673,44 @@
       font-size: 1rem;
       font-weight: 500;
       box-sizing: border-box;
+      overflow: hidden;
+    }
+    .zigzag-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 16px;
+    }
+    .zigzag-placeholder-wrap {
+      position: relative;
+      width: 100%;
+      overflow: visible;
+    }
+    .zigzag-block:has(.zigzag-placeholder-wrap),
+    .zigzag-media:has(.zigzag-placeholder-wrap) { overflow: visible; }
+    .zigzag-placeholder-wrap .zigzag-placeholder { background: transparent; overflow: visible; }
+    .zigzag-placeholder-wrap .zigzag-placeholder img { transform: scale(1.5); }
+    .zigzag-placeholder-arrows-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .zigzag-arrow {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      animation: zigzag-arrow-float 2.8s ease-in-out infinite;
+    }
+    .zigzag-arrow--pink { top: 10%; right: 24%; animation-delay: 0s; }
+    .zigzag-arrow--green { top: 50%; right: 26%; animation-delay: 0.4s; }
+    .zigzag-arrow--blue { top: 30%; left: 20%; animation-delay: 0.8s; }
+    @keyframes zigzag-arrow-float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-6px) translateX(3px); }
     }
 
     @media (max-width: 900px) {
@@ -539,21 +723,34 @@
       .zigzag-block, .zigzag-block--reverse { flex-direction: column; margin-bottom: 4rem; gap: 1.5rem; }
       .zigzag-media { order: -1; min-width: 0; max-width: 100%; box-sizing: border-box; }
       .zigzag-placeholder { min-height: 16rem; width: 100%; max-width: 100%; border-radius: 16px; box-sizing: border-box; }
+      /* Prototipo navegable: en móvil la imagen sin scale para que no se corte ni desborde */
+      .zigzag-placeholder-wrap { overflow: hidden; border-radius: 16px; }
+      .zigzag-placeholder-wrap .zigzag-placeholder img { transform: scale(1); }
+      .zigzag-block:has(.zigzag-placeholder-wrap) { overflow: hidden; }
+      .zigzag-media:has(.zigzag-placeholder-wrap) { overflow: hidden; }
+      .zigzag-arrow { width: 32px; height: 32px; }
     }
     @media (max-width: 767px) {
       .nav-burger { display: flex; }
+      .nav-landing--open .nav-burger { visibility: hidden; pointer-events: none; }
       .nav-landing-ctas { display: none; }
       .hero { padding-top: 6.5rem; }
       .nav-drawer {
         display: none;
         position: fixed;
         inset: 0;
-        z-index: 99;
+        z-index: 9999;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         flex-direction: column;
+        background: var(--midnight-blue);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-landing--open {
+        z-index: 10001;
       }
       .nav-landing--open .nav-drawer {
         display: flex;
@@ -562,7 +759,7 @@
       .nav-drawer-backdrop {
         position: absolute;
         inset: 0;
-        background: rgba(12, 41, 79, 0.98);
+        background: var(--midnight-blue);
         cursor: pointer;
       }
       .nav-drawer-header {
@@ -611,6 +808,24 @@
         right: 0;
         max-width: 100%;
       }
+      .nav-drawer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .nav-drawer-links a {
+        font-family: Poppins, sans-serif;
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: var(--white);
+        text-decoration: none;
+        padding: 0.75rem 0;
+        transition: opacity 0.2s ease;
+      }
+      .nav-drawer-links a:hover {
+        opacity: 0.85;
+      }
       .nav-drawer-panel .btn { display: block; width: 100%; text-align: center; padding: 0.875rem 1.5rem; min-height: 48px; }
     }
     @media (max-width: 600px) {
@@ -618,13 +833,16 @@
       .phrase-block-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
       .phrase-block-visual { padding-left: 1.25rem; padding-right: 1.25rem; }
       .section { padding-top: 3rem; padding-bottom: 3rem; }
+      .zigzag-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+      .zigzag-section .section-heading { margin-bottom: 2rem; }
+      .zigzag-block, .zigzag-block--reverse { margin-bottom: 3rem; gap: 1.25rem; }
+      .zigzag-placeholder { min-height: 14rem; }
       .hero { padding-top: 6.5rem; padding-bottom: 5rem; }
       .btn-group { flex-direction: column; align-items: stretch; }
       .btn { text-align: center; }
       .partner-logos { gap: 1rem; margin-bottom: 4rem; }
       .partner-logos img { width: 48px; height: 48px; }
       .form-submit { display: block; width: 100%; min-height: 48px; }
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
     }
   </style>
 </head>
@@ -639,6 +857,11 @@
           <defs><linearGradient id="logoGradNav" x1="72" y1="45" x2="-8" y2="64.5" gradientUnits="userSpaceOnUse"><stop stop-color="#2DC72F"/><stop offset="1" stop-color="#E05CEB"/></linearGradient></defs>
         </svg>
       </a>
+      <div class="nav-landing-links" aria-label="Enlaces de sección">
+        <a href="#video">¿De qué trata?</a>
+        <a href="#que-incluye-programa">¿Qué incluye?</a>
+        <a href="#pricing">Precio</a>
+      </div>
       <button type="button" class="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-drawer">
         <span class="nav-burger-bar"></span>
         <span class="nav-burger-bar"></span>
@@ -663,6 +886,11 @@
           </button>
         </header>
         <div class="nav-drawer-panel">
+          <nav class="nav-drawer-links" aria-label="Secciones">
+            <a href="#video">¿De qué trata?</a>
+            <a href="#que-incluye-programa">¿Qué incluye?</a>
+            <a href="#pricing">Precio</a>
+          </nav>
           <a href="#" class="btn btn-secondary">Sesión de Estrategia 1:1</a>
           <a href="#postular" class="btn btn-primary">Postular al programa</a>
         </div>
@@ -773,7 +1001,7 @@
           <p>Convertimos tu idea en un modelo claro y viable. Propuesta de valor, cliente ideal, pricing y proyección de retorno para el primer año. El entregable es un documento.</p>
         </div>
         <div class="zigzag-media">
-          <div class="zigzag-placeholder">Modelo de negocio</div>
+          <div class="zigzag-placeholder"><img src="assets/project flow.png" alt="Modelo de negocio"></div>
         </div>
       </div>
       <div class="zigzag-block zigzag-block--reverse">
@@ -782,7 +1010,14 @@
           <p>Definimos qué construir, en qué orden y cómo hacerlo tangible. Sales con un prototipo navegable listo para mostrarle a clientes. El entregable es un prototipo navegable.</p>
         </div>
         <div class="zigzag-media">
-          <div class="zigzag-placeholder">Prototipo navegable</div>
+          <div class="zigzag-placeholder-wrap">
+            <div class="zigzag-placeholder"><img src="assets/screens mobile2.png" alt="Prototipo navegable"></div>
+            <div class="zigzag-placeholder-arrows-overlay" aria-hidden="true">
+              <img class="zigzag-arrow zigzag-arrow--pink" src="assets/flecha rosada.png" alt="">
+              <img class="zigzag-arrow zigzag-arrow--green" src="assets/flecha verda.png" alt="">
+              <img class="zigzag-arrow zigzag-arrow--blue" src="assets/flecha azul.png" alt="">
+            </div>
+          </div>
         </div>
       </div>
       <div class="zigzag-block">
@@ -791,8 +1026,42 @@
           <p>Todo lo que necesitas para salir a vender antes de tener el producto listo. Landing, demo, script de ventas y lista de prospectos.</p>
         </div>
         <div class="zigzag-media">
-          <div class="zigzag-placeholder">Activos de venta</div>
+          <div class="zigzag-placeholder"><img src="assets/aldingpage.png" alt="Activos de venta"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section pricing-section" id="pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <h2 class="pricing-heading">Todo empieza con estrategia</h2>
+        <p class="pricing-heading-subtitle">Validemos tu idea juntos</p>
+      </div>
+      <div class="pricing-cards">
+        <article class="pricing-card">
+          <h3 class="pricing-card-title">Starter</h3>
+          <span class="pricing-card-price">USD 450</span>
+          <p class="pricing-card-subtitle">Para validar tu idea antes de invertir.</p>
+          <p class="pricing-card-desc">Estrategia de negocio completa: propuesta de valor, cliente ideal, pricing y proyección año 1.</p>
+          <a href="https://form.jotform.com/230673987658071" class="btn btn-secondary pricing-card-cta" target="_blank" rel="noopener">Postular al programa</a>
+        </article>
+        <article class="pricing-card pricing-card--popular">
+          <span class="pastilla pastilla-secundaria">El más popular</span>
+          <h3 class="pricing-card-title">Founder</h3>
+          <span class="pricing-card-price">USD 990 - USD 2,500</span>
+          <p class="pricing-card-subtitle">Para salir a vender sin haber desarrollado nada.</p>
+          <p class="pricing-card-desc">Estrategia de negocio, prototipo navegable y activos de venta listos.</p>
+          <a href="https://form.jotform.com/230673987658071" class="btn btn-primary pricing-card-cta" target="_blank" rel="noopener">Postular al programa</a>
+        </article>
+        <article class="pricing-card">
+          <h3 class="pricing-card-title">MVP Ready</h3>
+          <span class="pricing-card-price">USD 6,000 - USD 20,000</span>
+          <p class="pricing-card-subtitle">Para los que ya validaron y quieren construir.</p>
+          <p class="pricing-card-desc">Todo el programa más tu SaaS listo en producción.</p>
+          <a href="https://form.jotform.com/230673987658071" class="btn btn-secondary pricing-card-cta" target="_blank" rel="noopener">Postular al programa</a>
+        </article>
       </div>
     </div>
   </section>
@@ -818,67 +1087,17 @@
     </div>
   </section>
 
-  <!-- 9. CTA final -->
-  <section class="section section-lg" id="postular">
-    <div class="container">
-      <div class="grid-2 cta-split">
-        <div class="cta-box">
-          <h2>Agendar llamada exploratoria</h2>
-          <p class="text-lead">¿Quieres saber si este programa es para ti? Agenda una llamada de 45 minutos con nuestro equipo.</p>
-          <a href="https://calendly.com/" class="btn btn-primary" target="_blank" rel="noopener">Agendar llamada — $80</a>
-        </div>
-        <div class="cta-box">
-          <h2>Postular al programa</h2>
-          <form action="#" method="post" id="form-postular">
-            <div class="form-group">
-              <label for="nombre">Nombre completo</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="tu@email.com">
-            </div>
-            <div class="form-group">
-              <label for="idea">¿Cuál es tu idea de negocio?</label>
-              <textarea id="idea" name="idea" placeholder="Describe tu idea en pocas líneas..."></textarea>
-            </div>
-            <div class="form-group">
-              <label for="etapa">¿En qué etapa estás?</label>
-              <select id="etapa" name="etapa" required>
-                <option value="">Selecciona</option>
-                <option value="idea">Solo tengo la idea</option>
-                <option value="investigacion">Ya hice algo de investigación</option>
-                <option value="prototipo">Tengo un prototipo básico</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="mercado">¿Tu mercado objetivo es LATAM o US?</label>
-              <select id="mercado" name="mercado" required>
-                <option value="">Selecciona</option>
-                <option value="latam">LATAM</option>
-                <option value="us">US</option>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary form-submit">Enviar postulación</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. Footer -->
+  <!-- Footer (CTA + copyright como en diseño) -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
-        <a href="https://www.nextrocket.io/" class="footer-logo" aria-label="Next Rocket">
-          <svg width="110" height="61" viewBox="0 0 110 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3.792 57.084C3.176 57.084 2.624 56.984 2.136 56.784C1.648 56.584 1.256 56.288 0.96 55.896C0.672 55.504 0.52 55.032 0.504 54.48H2.688C2.72 54.792 2.828 55.032 3.012 55.2C3.196 55.36 3.436 55.44 3.732 55.44C4.036 55.44 4.276 55.372 4.452 55.236C4.628 55.092 4.716 54.896 4.716 54.648C4.716 54.44 4.644 54.268 4.5 54.132C4.364 53.996 4.192 53.884 3.984 53.796C3.784 53.708 3.496 53.608 3.12 53.496C2.576 53.328 2.132 53.16 1.788 52.992C1.444 52.824 1.148 52.576 0.9 52.248C0.652 51.92 0.528 51.492 0.528 50.964C0.528 50.18 0.812 49.568 1.38 49.128C1.948 48.68 2.688 48.456 3.6 48.456C4.528 48.456 5.276 48.68 5.844 49.128C6.412 49.568 6.716 50.184 6.756 50.976H4.536C4.52 50.704 4.42 50.492 4.236 50.34C4.052 50.18 3.816 50.1 3.528 50.1C3.28 50.1 3.08 50.168 2.928 50.304C2.776 50.432 2.7 50.62 2.7 50.868C2.7 51.14 2.828 51.352 3.084 51.504C3.34 51.656 3.74 51.82 4.284 51.996C4.828 52.18 5.268 52.356 5.604 52.524C5.948 52.692 6.244 52.936 6.492 53.256C6.74 53.576 6.864 53.988 6.864 54.492C6.864 54.972 6.74 55.408 6.492 55.8C6.252 56.192 5.9 56.504 5.436 56.736C4.972 56.968 4.424 57.084 3.792 57.084ZM16.1068 48.576V50.22H13.8748V57H11.8228V50.22H9.59081V48.576H16.1068ZM21.0727 48.576V53.616C21.0727 54.12 21.1967 54.508 21.4447 54.78C21.6927 55.052 22.0567 55.188 22.5367 55.188C23.0167 55.188 23.3847 55.052 23.6407 54.78C23.8967 54.508 24.0247 54.12 24.0247 53.616V48.576H26.0767V53.604C26.0767 54.356 25.9167 54.992 25.5967 55.512C25.2767 56.032 24.8447 56.424 24.3007 56.688C23.7647 56.952 23.1647 57.084 22.5007 57.084C21.8367 57.084 21.2407 56.956 20.7127 56.7C20.1927 56.436 19.7807 56.044 19.4767 55.524C19.1727 54.996 19.0207 54.356 19.0207 53.604V48.576H21.0727ZM32.5936 48.576C33.4816 48.576 34.2576 48.752 34.9216 49.104C35.5856 49.456 36.0976 49.952 36.4576 50.592C36.8256 51.224 37.0096 51.956 37.0096 52.788C37.0096 53.612 36.8256 54.344 36.4576 54.984C36.0976 55.624 35.5816 56.12 34.9096 56.472C34.2456 56.824 33.4736 57 32.5936 57H29.4376V48.576H32.5936ZM32.4616 55.224C33.2376 55.224 33.8416 55.012 34.2736 54.588C34.7056 54.164 34.9216 53.564 34.9216 52.788C34.9216 52.012 34.7056 51.408 34.2736 50.976C33.8416 50.544 33.2376 50.328 32.4616 50.328H31.4896V55.224H32.4616ZM42.1283 48.576V57H40.0763V48.576H42.1283ZM49.5194 57.084C48.7274 57.084 47.9994 56.9 47.3354 56.532C46.6794 56.164 46.1554 55.652 45.7634 54.996C45.3794 54.332 45.1874 53.588 45.1874 52.764C45.1874 51.94 45.3794 51.2 45.7634 50.544C46.1554 49.888 46.6794 49.376 47.3354 49.008C47.9994 48.64 48.7274 48.456 49.5194 48.456C50.3114 48.456 51.0354 48.64 51.6914 49.008C52.3554 49.376 52.8754 49.888 53.2514 50.544C53.6354 51.2 53.8274 51.94 53.8274 52.764C53.8274 53.588 53.6354 54.332 53.2514 54.996C52.8674 55.652 52.3474 56.164 51.6914 56.532C51.0354 56.9 50.3114 57.084 49.5194 57.084ZM49.5194 55.212C50.1914 55.212 50.7274 54.988 51.1274 54.54C51.5354 54.092 51.7394 53.5 51.7394 52.764C51.7394 52.02 51.5354 51.428 51.1274 50.988C50.7274 50.54 50.1914 50.316 49.5194 50.316C48.8394 50.316 48.2954 50.536 47.8874 50.976C47.4874 51.416 47.2874 52.012 47.2874 52.764C47.2874 53.508 47.4874 54.104 47.8874 54.552C48.2954 54.992 48.8394 55.212 49.5194 55.212Z" fill="url(#logoGradFooter)"/>
-            <path d="M12.42 17H9.342L4.194 9.206V17H1.116V4.364H4.194L9.342 12.194V4.364H12.42V17ZM20.2492 6.83V9.386H24.3712V11.762H20.2492V14.534H24.9112V17H17.1712V4.364H24.9112V6.83H20.2492ZM37.1694 17L34.5954 13.13L32.3274 17H28.8354L32.8854 10.574L28.7454 4.364H32.3274L34.8654 8.18L37.0974 4.364H40.5894L36.5754 10.736L40.7514 17H37.1694ZM53.9066 4.364V6.83H50.5586V17H47.4806V6.83H44.1326V4.364H53.9066ZM7.56 39L4.932 34.23H4.194V39H1.116V26.364H6.282C7.278 26.364 8.124 26.538 8.82 26.886C9.528 27.234 10.056 27.714 10.404 28.326C10.752 28.926 10.926 29.598 10.926 30.342C10.926 31.182 10.686 31.932 10.206 32.592C9.738 33.252 9.042 33.72 8.118 33.996L11.034 39H7.56ZM4.194 32.052H6.102C6.666 32.052 7.086 31.914 7.362 31.638C7.65 31.362 7.794 30.972 7.794 30.468C7.794 29.988 7.65 29.61 7.362 29.334C7.086 29.058 6.666 28.92 6.102 28.92H4.194V32.052ZM21.3542 39.126C20.1662 39.126 19.0742 38.85 18.0782 38.298C17.0942 37.746 16.3082 36.978 15.7202 35.994C15.1442 34.998 14.8562 33.882 14.8562 32.646C14.8562 31.41 15.1442 30.3 15.7202 29.316C16.3082 28.332 17.0942 27.564 18.0782 27.012C19.0742 26.46 20.1662 26.184 21.3542 26.184C22.5422 26.184 23.6282 26.46 24.6122 27.012C25.6082 27.564 26.3882 28.332 26.9522 29.316C27.5282 30.3 27.8162 31.41 27.8162 32.646C27.8162 33.882 27.5282 34.998 26.9522 35.994C26.3762 36.978 25.5962 37.746 24.6122 38.298C23.6282 38.85 22.5422 39.126 21.3542 39.126ZM21.3542 36.318C22.3622 36.318 23.1662 35.982 23.7662 35.31C24.3782 34.638 24.6842 33.75 24.6842 32.646C24.6842 31.53 24.3782 30.642 23.7662 29.982C23.1662 29.31 22.3622 28.974 21.3542 28.974C20.3342 28.974 19.5182 29.304 18.9062 29.964C18.3062 30.624 18.0062 31.518 18.0062 32.646C18.0062 33.762 18.3062 34.656 18.9062 35.328C19.5182 35.988 20.3342 36.318 21.3542 36.318ZM31.5266 32.664C31.5266 31.416 31.7966 30.306 32.3366 29.334C32.8766 28.35 33.6266 27.588 34.5866 27.048C35.5586 26.496 36.6566 26.22 37.8806 26.22C39.3806 26.22 40.6646 26.616 41.7326 27.408C42.8006 28.2 43.5146 29.28 43.8746 30.648H40.4906C40.2386 30.12 39.8786 29.718 39.4106 29.442C38.9546 29.166 38.4326 29.028 37.8446 29.028C36.8966 29.028 36.1286 29.358 35.5406 30.018C34.9526 30.678 34.6586 31.56 34.6586 32.664C34.6586 33.768 34.9526 34.65 35.5406 35.31C36.1286 35.97 36.8966 36.3 37.8446 36.3C38.4326 36.3 38.9546 36.162 39.4106 35.886C39.8786 35.61 40.2386 35.208 40.4906 34.68H43.8746C43.5146 36.048 42.8006 37.128 41.7326 37.92C40.6646 38.7 39.3806 39.09 37.8806 39.09C36.6566 39.09 35.5586 38.82 34.5866 38.28C33.6266 37.728 32.8766 36.966 32.3366 35.994C31.7966 35.022 31.5266 33.912 31.5266 32.664ZM55.6055 39L51.3575 33.42V39H48.2795V26.364H51.3575V31.908L55.5695 26.364H59.1875L54.2915 32.556L59.3675 39H55.6055ZM66.4283 28.83V31.386H70.5503V33.762H66.4283V36.534H71.0903V39H63.3503V26.364H71.0903V28.83H66.4283ZM84.6986 26.364V28.83H81.3506V39H78.2726V28.83H74.9246V26.364H84.6986Z" fill="white"/>
-            <defs><linearGradient id="logoGradFooter" x1="72" y1="45" x2="-8" y2="64.5" gradientUnits="userSpaceOnUse"><stop stop-color="#2DC72F"/><stop offset="1" stop-color="#E05CEB"/></linearGradient></defs>
-          </svg>
-        </a>
-        <div class="footer-copy">Next Rocket · <a href="https://www.nextrocket.io/">nextrocket.io</a></div>
+      <div class="footer-cta">
+        <div class="footer-cta-text">
+          <h2 class="footer-heading">Are you ready to build the <span class="text-gradient">Next Rocket?</span></h2>
+          <p class="footer-lead">Tell us your idea and we will help you bring it to life.</p>
+        </div>
+        <a href="https://form.jotform.com/230673987658071" class="btn btn-primary" target="_blank" rel="noopener">Postular al programa</a>
       </div>
+      <p class="footer-copy">Next Rocket 2026, all rights reserved.</p>
     </div>
   </footer>
 
@@ -927,11 +1146,6 @@
       if (backdrop) backdrop.addEventListener('click', close);
       if (drawerLinks) for (var i = 0; i < drawerLinks.length; i++) drawerLinks[i].addEventListener('click', close);
     })();
-
-    document.getElementById('form-postular').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Gracias por tu interés. Te contactaremos pronto.');
-    });
   </script>
 </body>
 </html>
