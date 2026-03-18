@@ -1,0 +1,16 @@
+/**
+ * Design System — Tokens
+ * Colores, gradientes y variables de marca. Usar en todas las landings Next Rocket.
+ */
+:root {
+  --midnight-blue: #0c294f;
+  --blue-card: #0f3463;
+  --white: white;
+  --white-smoke: #f0f0f0;
+  --gradient-primary: linear-gradient(84.86deg, #5861ed, #ec46d1);
+  --gradient-primary-soft: linear-gradient(86.5deg, rgba(88, 97, 237, 0.3), rgba(236, 70, 209, 0.3));
+  --gradient-hero: linear-gradient(229.38deg, #217bee, #0c294f 41.27%);
+  --gradient-text: linear-gradient(to right, #3888f0, #8beb7b 50%, #cd4cd8 101%);
+  --gradient-promise: linear-gradient(273.29deg, rgba(22, 59, 106, 0.9) 17.49%, rgba(45, 30, 113, 0.9) 91.59%);
+  --border-secondary: #e75a52;
+}
