@@ -266,6 +266,19 @@
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column; align-items: stretch; }
   .hero { padding-bottom: 5rem; overflow: hidden; }
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    gap: 1rem;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+  }
   .hero-visual { max-width: 100%; width: 100%; margin-left: 0; min-height: 22rem; }
   .hero_images-floating { min-height: 22rem; }
   .hero_images-floating .image-5 { width: 13.25rem; right: 7rem; top: 1rem; }
@@ -684,6 +697,8 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; margin: 0 0 1rem;
   .nav-landing--open .nav-burger { visibility: hidden; pointer-events: none; }
   .nav-landing-ctas { display: none; }
   .hero { padding-top: 6.5rem; }
+  /* Collage decorativo del hero: solo desktop / tablet ancha */
+  .hero-visual { display: none !important; }
   .nav-drawer {
     display: none;
     position: fixed;
@@ -749,13 +764,50 @@ h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; margin: 0 0 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
     gap: 1rem;
     padding: 1.5rem;
+    padding-top: 2rem;
     left: 0;
     right: 0;
     max-width: 100%;
+    box-sizing: border-box;
   }
   .nav-drawer-links {
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    margin: 0 0 0.5rem;
+    padding: 0;
+  }
+  .nav-drawer-links a {
+    font-family: Poppins, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--white);
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    transition: color 0.2s ease, opacity 0.2s ease;
+    white-space: normal;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-drawer-links a:last-child {
+    border-bottom: none;
+  }
+  .nav-drawer-links a:hover,
+  .nav-drawer-links a:focus-visible {
+    color: var(--white-smoke);
+    opacity: 0.95;
+  }
+  .nav-drawer-panel > .btn {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
